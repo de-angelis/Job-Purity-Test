@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Custom Purity Test</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+      background: #f7f7f7;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .question {
+      margin: 8px 0;
+      padding: 6px;
+      background: white;
+      border-radius: 6px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<h1>My Custom Purity Test</h1>
+
+<form id="testForm"></form>
+
+<div style="text-align:center;">
+  <button type="button" onclick="calculateScore()">Submit</button>
+</div>
+
+<p id="result"></p>
+
+<script>
+const questions = [
+"Cazziatone da elisabetta",
+"Cazziatone da elena",
+"Rubare dal bar",
+"Rotto qualcosa del collegio",
+"Perdere soldi della cauzione (o parte)",
+"Multa alla mensa",
+"Perso le chiavi",
+"Dormito in lounge",
+"Chiuso fuori dalla stanza",
+"Dormito ai tavolini fuori",
+"Dormito in bunker",
+"Non esserti svegliato per le pulizie",
+"Appropriato di qualcosa del collegio",
+"Portarsi in stanza le bacinelle grigie",
+"Portare in stanza stoviglie",
+"Rubato alla mensa del tosi",
+"Giocato al biliardino dello scopoli",
+"Battuto serena a biliardino",
+"Abbracciato mohammed",
+"Sesso nei bagni disabili",
+"Sesso al job",
+"Cacciato il tuo compagno di stanza per fare sesso",
+"Hai sentito qualcuno fare sesso",
+"Hai fatto sesso con almeno 3 persone diverse nei luoghi del job",
+"Hai fatto sesso con un internazionale",
+"Masturbato con il compagno di stanza in camera",
+"Spacciato le bibite della mensa",
+"Andato al sushi al centro giotto con i jobbers",
+"Portato mohammed al mercolegin",
+"Ti sei ubriacato alle feste del job",
+"Sei tornato ubriaco al job",
+"Sesso in guest house",
+"Visto peppe in mutande",
+"Giocato a ping pong con serafino",
+"Bevuto tisanina con anna",
+"Conosciuto gloria",
+"Passato sotto il biliardino",
+"Visto mare fuori",
+"Essere sdogato",
+"Sdogare",
+"Trovato elsa e anna in camera",
+"Mollato palestra",
+"Studiato in aula 2 fino alle 2",
+"Farsi svegliare dalle signore delle pulizie",
+"Avuto la candida",
+"Tifato sal da vinci a sanremo",
+"Top 3 al fantasanremo",
+"Lasciato i vestiti in lavanderia per più di una settimana",
+"Sentito dori urlare per i corridoi",
+"Abbracciato la colonna in refe",
+"Bevuto il caffè di giorgia",
+"Defecato nei bagni comuni",
+"Scannerizzato il qr di timothee salame",
+"Battuto benny corso a scambio",
+"Avvistato lorenzo palomba per più di 5 minuti",
+"Rubato un ombrello all’ingresso",
+"Fatto riparare la bici da davide",
+"Visto le tette di dori",
+"Espulso dal collegio da luca rigo",
+"Rubato chiavi aula musica a fra recchia",
+"Sentire martin lamentarsi della vita",
+"Visitato gioiatauro con jayamal",
+"Buttato cartoni della pizza",
+"Ordinato la pizza da ideapizza",
+"Mangiato la pizza dell’amico di ousmane",
+"Ordinato il kebab da diva",
+"Farsi chiamare tremone da sara",
+"Toccato la pelata di simo perra",
+"Fatto 69 in collegio",
+"Baciato qualcuno di un’altra residenza",
+"Baciato qualcuno a una festa in altra residenza",
+"Aperto la porta a serafino",
+"Sentito davide bestemmiare",
+"Cavalcato il cavallo di alice baldo",
+"Visto alice baldo parlare in videochiamata col suo cavallo",
+"Visto tobi senza cuffie",
+"Essere illuso dal dessert al cacao",
+"Smarrito indumenti biancheria",
+"Visto almeno 8 paia di scarpe di alice mariani",
+"Preso cibo dalla mensa per il weekend",
+"Lavato le pentole al posto degli altri",
+"Cucinato pasta al pesto",
+"Sentito giorgia parlare in arbresh",
+"Mohammed ti ha chiesto \"come butta amo\"?",
+"Visto mohammed ballare",
+"Chiesto a gps di aprire la stanza",
+"Preso in giro serena",
+"Capito una battuta prima di serena",
+"Andare a dormire dopo tobi",
+"Andato a correre con vincent",
+"Insultato i terroni",
+"Ascoltato Fabi parlare di thomas",
+"Fatto la ceretta a peppe",
+"Sputare a peppe e incolpare altri",
+"Sentito furri dire \"follia\"",
+"Sentire riccardo dire \"crazy\"",
+"Avuto una crush per simo (perche sei gay vaffanculo)",
+"Dato i tuoi avanzi a gioele / fra lucchetta",
+"Visto luize lontana da fabi",
+"Sentito giulia nominare michele bravi",
+"Fatto pompe, pompini, pompette",
+"Schiaffeggiato il culo a dori",
+"Fornito assistenza a un collegiale",
+"Karaoke al berlino",
+"Festa al fish con yuchen",
+"Festa all’hall",
+"Fatto serata al chiosco",
+"Preso caffe al clistina",
+"Mercolegin + pulizie alle 9",
+"Serata + lezione 8.30",
+"Andare alla pam in pigiama",
+"Lamentato dei prezzi della pam e andarci lo stesso",
+"Lasciare banane del box",
+"Invadere altri box",
+"Rubare pennarelli",
+"Colazione da manzato",
+"Spingere un furgone impantanato",
+"Portato o essersi fatto portare sul portapacchi",
+"Giocato a exploding kittens con martin",
+"Fatto il ramadan",
+"Messa con df",
+"Pranzato con df",
+"Fatto l’esperimento di alice",
+"Visto anna ubriaca",
+"Visto fra grava incazzata",
+"Fatto un cruciverba con alice",
+"Contribuito alla scrittura di un papiro",
+"Visto una partita del napoli",
+"Preso la salmonella",
+"Imbucato un esterno",
+"Visto il proprio compagno di stanza nudo",
+"Caduto o fatto cadere qualcuno in bici",
+"Avvistato giorgia al tosi",
+"Visto la vasca da bagno di francesco barone",
+"Immatricolato",
+"Mangiato in bunker",
+"Sentito nephele suonare l’arpa",
+"Corso la padova marathon",
+"Fatto il presidente di una commissione",
+"Partecipato al torneo del vino",
+"Visto il tramonto al terzo piano",
+"Chiamato un’ambulanza al job",
+"Ghostato elisabetta",
+"Non prenotato il pranzo",
+"Fatto incatenare la bici da Elisabetta"
+];
+
+// Render questions
+const form = document.getElementById("testForm");
+
+questions.forEach((q, i) => {
+  const div = document.createElement("div");
+  div.className = "question";
+
+  div.innerHTML = `
+    <label>
+      <input type="checkbox" name="q${i}">
+      ${q}
+    </label>
+  `;
+
+  form.appendChild(div);
+});
+
+// Calculate score
+function calculateScore() {
+  let checked = 0;
+
+  questions.forEach((_, i) => {
+    const cb = document.querySelector(`input[name="q${i}"]`);
+    if (cb.checked) checked++;
+  });
+
+  const total = questions.length;
+  const score = total - checked;
+
+  let label = "";
+
+  if (score > 8) label = "Very pure 😇";
+  else if (score > 5) label = "Mostly wholesome 🙂";
+  else if (score > 2) label = "Getting wild 😏";
+  else label = "Chaos mode 😈";
+
+  document.getElementById("result").innerText =
+    `Your score: ${score} / ${total} — ${label}`;
+}
+</script>
+
+</body>
+</html>
