@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Custom Purity Test</title>
+  <title>Job Custom Purity Test</title>
 
   <style>
     body {
@@ -171,6 +171,7 @@ const questions = [
 "Mi lamento dei prezzi della Pam per poi andarci comunque",
 "Ho dimenticato delle banane nel mio box",
 "Ho colonizzato altri box vuoti",
+"Ho sentito Alice Mariani raccontare le sue disavventure amorose",
 "Ho rubato un pennarello dall'aula 1",
 "Ho fatto colazione da Manzato con sconto Mazza",
 "Ho spinto il furgone della Forcellini",
@@ -203,9 +204,15 @@ const questions = [
 "Ho ghostato Elisabetta",
 "Ho dimenticato di prenotare il pranzo",
 "Elisabetta mi ha incatenato la bici",
-"Ho visto Sara Vietri con il turbante",
+"Ho visto Sara Vietri con il turbante in giro per il Job",
 "Ho giocato a bombardino con Mohammed",
 "Ho sentito Mohammed intonare \"L'Italiano\"",
+"Ho cominciato a studiare prima che arrivassero le signore delle pulizie",
+"Ho subito molestie da Peppe (si scherza)",
+"Ho rubato dal box di altri",
+"Ho visto Chiara arrivare in orario",
+"Ho sentito Lisa dire \"Hai spaccato!\"",
+
 
 ];
 
@@ -236,17 +243,16 @@ function calculateScore() {
   });
 
   const total = questions.length;
-  const score = total - checked;
+  const score = checked;
 
   let label = "";
 
-  if (score > 8) label = "Very pure 😇";
-  else if (score > 5) label = "Mostly wholesome 🙂";
-  else if (score > 2) label = "Getting wild 😏";
-  else label = "Chaos mode 😈";
+  if (score > 100) label = "Sei una colonna del Job Campus";
+  else if (score > 75) label = "Stai diventando un vecchio, continua così";
+  else label = "Sei proprio una matricola";
 
   document.getElementById("result").innerText =
-    `Your score: ${score} / ${total} — ${label}`;
+    `Il tuo punteggio: ${score} / ${total} — ${label}`;
 }
 </script>
 
